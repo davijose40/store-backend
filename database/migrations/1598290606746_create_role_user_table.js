@@ -3,7 +3,7 @@
 const Schema = use('Schema')
 
 class RoleUserTableSchema extends Schema {
-  up () {
+  up() {
     this.create('role_user', table => {
       table.increments()
       table.integer('role_id').unsigned().index()
@@ -14,7 +14,7 @@ class RoleUserTableSchema extends Schema {
     })
   }
 
-  down () {
+  down() {
     this.drop('role_user')
   }
 }

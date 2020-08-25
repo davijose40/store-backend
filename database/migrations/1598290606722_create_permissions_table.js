@@ -3,7 +3,7 @@
 const Schema = use('Schema')
 
 class PermissionsTableSchema extends Schema {
-  up () {
+  up() {
     this.create('permissions', table => {
       table.increments()
       table.string('slug').notNullable().unique()
@@ -13,7 +13,7 @@ class PermissionsTableSchema extends Schema {
     })
   }
 
-  down () {
+  down() {
     this.drop('permissions')
   }
 }

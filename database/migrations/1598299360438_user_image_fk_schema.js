@@ -15,7 +15,7 @@ class UserImageFkSchema extends Schema {
   }
 
   down() {
-    this.table('user_image_fks', table => {
+    this.table('users', table => {
       table.dropForeign('images_id')
     })
   }
