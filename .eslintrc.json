@@ -20,6 +20,7 @@
     ],
     "rules": {
       "prettier/prettier": "error",
+      "camelcase": "off",
       "no-undef": "off",
       "handle-callback-err": "warn"
     }
