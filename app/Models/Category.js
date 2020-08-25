@@ -12,7 +12,7 @@ class Category extends Model {
   }
 
   /*
-  relacionamento entre Category and Product
+  relacionamento entre Category and Products
   */
   products() {
     return this.belongsToMany('App/Models/Product')
