@@ -34,7 +34,7 @@ class ClientSeeder {
     })
     // eslint-disable-next-line no-unused-vars
     const adminRole = await Role.findBy('slug', 'admin')
-    await user.roles().attach([role.id])
+    await user.roles().attach([adminRole.id])
   }
 }
 
