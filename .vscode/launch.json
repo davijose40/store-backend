@@ -8,8 +8,8 @@
       "type": "node",
       "request": "launch",
       "name": "Debug",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
       "port": 9229,
       "internalConsoleOptions": "openOnSessionStart",
       "skipFiles": [
