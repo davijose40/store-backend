@@ -16,6 +16,7 @@ class ProductController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    * @param {View} ctx.view
+   * @param {Object} ctx.pagination
    */
   async index({ request, response, pagination }) {
     const name = request.input('name')
@@ -26,7 +27,7 @@ class ProductController {
       query.where('name', 'ILIKE', `%${name}%`)
     }
 
-    const products = await query.pagination(pagination.page, pagination.limit)
+    const products = await query.paginate(pagination.page, pagination.limit)
     return response.send(products)
   }
 
@@ -76,7 +77,7 @@ class ProductController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update({ params, request, response }) {
+  async update({ params: { id }, request, response }) {
     const product = await Product.findOrFail(id)
     try {
       const { name, description, price, image_id } = request.all()
@@ -101,7 +102,7 @@ class ProductController {
   async destroy({ params: { id }, request, response }) {
     const product = await Product.findOrFail(id)
     try {
-      await product.destroy()
+      await product.delete()
       return response.status(204).send()
     } catch (error) {
       return response
