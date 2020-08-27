@@ -1,6 +1,7 @@
 'use stric'
 
 const crypto = use('crypto')
+// eslint-disable-next-line no-unused-vars
 const Helpers = use('Helpers')
 
 /**
