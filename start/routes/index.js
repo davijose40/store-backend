@@ -14,11 +14,8 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
+// eslint-disable-next-line no-unused-vars
 const Route = use('Route')
-
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-}).as('HomePage')
 
 /**
  * importa rotas de autenticação
