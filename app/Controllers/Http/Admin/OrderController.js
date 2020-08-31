@@ -28,16 +28,16 @@ class OrderController {
     const { status, id } = request.only(['status', 'id'])
     const query = Order.query()
 
-    if(status && id) {
+    if (status && id) {
       query.where('status', status)
       query.orWhere('id', 'ILIKE', `%${id}%`)
     } else if (status) {
       query.where('status', status)
     } else if (id) {
-      query.orWhere('id', 'ILIKE', `%${id}%`)
+      query.where('id', 'ILIKE', `%${id}%`)
     }
 
-    const orders = query.paginate(pagination.page, pagination.limit)
+    const orders = await query.paginate(pagination.page, pagination.limit)
 
     return response.send(orders)
   }
@@ -159,8 +159,13 @@ class OrderController {
     const coupon = await Coupon.findByOrFail('code', code.toUpperCase())
     const order = await Order.findOrFail(id)
 
-    const discount
-    const info = {}
+    var info = {
+      message: '',
+      success: '',
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    let discount = {}
 
     try {
       const service = new Service(order)
@@ -186,12 +191,12 @@ class OrderController {
       return response.send({ order, info })
     } catch (error) {
       // error
-      return  response.status(400).send({ message: 'Erro ao aplicar o cupom!'})
+      return response.status(400).send({ message: 'Erro ao aplicar o cupom!' })
     }
   }
 
   async removeDiscount({ request, response }) {
-    const {discount_id} = request.all()
+    const { discount_id } = request.all()
 
     const discount = await Discount.findOrFail(discount_id)
 
