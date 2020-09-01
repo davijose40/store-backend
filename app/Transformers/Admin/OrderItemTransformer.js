@@ -1,6 +1,6 @@
 'use strict'
 
-const BumblebeeTransformer = use('Bumblebee/Transformer')
+const TransformerAbstract = use('Adonis/Addons/Bumblebee/TransformerAbstract')
 const ProductTransformer = use('App/Transformers/Admin/ProductTransformer')
 
 /**
@@ -9,8 +9,8 @@ const ProductTransformer = use('App/Transformers/Admin/ProductTransformer')
  * @class OrderItemTransformer
  * @constructor
  */
-class OrderItemTransformer extends BumblebeeTransformer {
-  static get defaultInclude() {
+class OrderItemTransformer extends TransformerAbstract {
+  defaultInclude() {
     return ['product']
   }
 

@@ -1,8 +1,8 @@
 'use strict'
 
-const BumblebeeTransformer = use('Bumblebee/Transformer')
-const UserTransformer = use('App/Transformers/Admin/UserTransformer')
+const TransformerAbstract = use('Adonis/Addons/Bumblebee/TransformerAbstract')
 const ProductTransformer = use('App/Transformers/Admin/ProductTransformer')
+const UserTransformer = use('App/Transformers/Admin/UserTransformer')
 const OrderTransformer = use('App/Transformers/Admin/OrderTransformer')
 
 /**
@@ -11,8 +11,8 @@ const OrderTransformer = use('App/Transformers/Admin/OrderTransformer')
  * @class CouponTransformer
  * @constructor
  */
-class CouponTransformer extends BumblebeeTransformer {
-  static get availableIncludes() {
+class CouponTransformer extends TransformerAbstract {
+  availableIncludes() {
     return ['users', 'products', 'orders']
   }
 

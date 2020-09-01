@@ -60,7 +60,7 @@ class OrderController {
 
     try {
       const { user_id, items, status } = request.all()
-      let order = await Order.create({ user_id, status }, trx)
+      const order = await Order.create({ user_id, status }, trx)
 
       const service = new Service(order, trx)
       if (items && items.length > 0) {
@@ -69,7 +69,7 @@ class OrderController {
 
       await trx.commit()
 
-      order = await transform.item(order, Transformer)
+      // order = await transform.item(order, Transformer)
 
       return response.status(201).send(order)
     } catch (error) {

@@ -1,6 +1,6 @@
 'use strict'
 
-const BumblebeeTransformer = use('Bumblebee/Transformer')
+const TransformerAbstract = use('Adonis/Addons/Bumblebee/TransformerAbstract')
 const CouponTransformer = use('App/Transformers/Admin/CouponTransformer')
 
 /**
@@ -9,8 +9,8 @@ const CouponTransformer = use('App/Transformers/Admin/CouponTransformer')
  * @class DiscountTransformer
  * @constructor
  */
-class DiscountTransformer extends BumblebeeTransformer {
-  static get defaultInclude() {
+class DiscountTransformer extends TransformerAbstract {
+  defaultInclue() {
     return ['coupon']
   }
 
@@ -25,8 +25,8 @@ class DiscountTransformer extends BumblebeeTransformer {
     }
   }
 
-  includeCoupon(model) {
-    return this.item(model.getRelated('coupon'), CouponTransformer)
+  includeCoupon(discount) {
+    return this.item(discount.getRelated('coupon'), CouponTransformer)
   }
 }
 

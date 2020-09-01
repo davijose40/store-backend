@@ -1,6 +1,6 @@
 'use strict'
 
-const BumblebeeTransformer = use('Bumblebee/Transformer')
+const TransformerAbstract = use('Adonis/Addons/Bumblebee/TransformerAbstract')
 const UserTransformer = use('App/Transformers/Admin/UserTransformer')
 const OrderItemTransformer = use('App/Transformers/Admin/OrderItemTransformer')
 const CouponTransformer = use('App/Transformers/Admin/CouponTransformer')
@@ -12,8 +12,8 @@ const DiscountTransformer = use('App/Transformers/Admin/DiscountTransformer')
  * @class OrderTransformer
  * @constructor
  */
-class OrderTransformer extends BumblebeeTransformer {
-  static get availableInclude() {
+class OrderTransformer extends TransformerAbstract {
+  availableInclude() {
     return ['user', 'coupons', 'items', 'discounts']
   }
 
@@ -23,11 +23,10 @@ class OrderTransformer extends BumblebeeTransformer {
   transform(order) {
     order = order.toJSON()
     return {
-      // add your transformation object here
       id: order.id,
       status: order.status,
-      total: order.total ? parseFloat(order.total.toFixed(2)) : 0,
       date: order.created_at,
+      total: order.total ? parseFloat(order.total.toFixed(2)) : 0,
       discount:
         order.__meta__ && order.__meta__.discount ? order.__meta__.discount : 0,
       subtotal:

@@ -1,6 +1,6 @@
 'use strict'
 
-const BumblebeeTransformer = use('Bumblebee/Transformer')
+const TransformerAbstract = use('Adonis/Addons/Bumblebee/TransformerAbstract')
 const ImageTransformer = use('App/Transformers/Admin/ImageTransformer')
 
 /**
@@ -9,8 +9,8 @@ const ImageTransformer = use('App/Transformers/Admin/ImageTransformer')
  * @class ProductTransformer
  * @constructor
  */
-class ProductTransformer extends BumblebeeTransformer {
-  static get defaultInclude() {
+class ProductTransformer extends TransformerAbstract {
+  defaultInclude() {
     return ['image']
   }
 
@@ -19,7 +19,6 @@ class ProductTransformer extends BumblebeeTransformer {
    */
   transform(model) {
     return {
-      // add your transformation object here
       id: model.id,
       name: model.name,
       description: model.description,

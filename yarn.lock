@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@adonisjs/ace@^5.0.8":
+"@adonisjs/ace@5.0.8":
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/@adonisjs/ace/-/ace-5.0.8.tgz#98ff6e55687ce4d7b9bd83d61e77dd4dd43420ea"
   integrity sha512-M4MGrzWzuE++jlPrbDPgo1tdv5j7uH4FsaoGddH+qJ+iXErVZuV6z2gYdmlorDDbvotFpxA+TTtDEXrTLCE08w==
@@ -288,10 +288,10 @@ adonis-acl@^1.1.1:
     lodash "^4.17.4"
     node-exceptions "^2.0.2"
 
-adonis-bumblebee@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/adonis-bumblebee/-/adonis-bumblebee-2.2.0.tgz#d959a973806df17efe3257c76b54f15f3477d9ed"
-  integrity sha512-NqwPBPIXmAlpOGZizvkwrtVzFXBoCWvfDFj1TE/NfyTFxRiCsYY6tTyBtyBz/Y4n2cYPTisg/x+ksZwZorzNvw==
+adonis-bumblebee@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/adonis-bumblebee/-/adonis-bumblebee-1.5.3.tgz#32cca7bdd994c3bf2dcd525ec0e4b68e2788f566"
+  integrity sha512-EcMyvYy73KfYA0D8xohtCOD+x6uVRGRt3SZxDGRn5C/9vja6XqksROmv0/XRpYztWCj+6DLC+euQeKvs/GEzHQ==
 
 ajv@^6.10.0, ajv@^6.10.2:
   version "6.12.4"

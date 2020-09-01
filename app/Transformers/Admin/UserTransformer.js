@@ -1,6 +1,6 @@
 'use strict'
 
-const BumblebeeTransformer = use('Bumblebee/Transformer')
+const TransformerAbstract = use('Adonis/Addons/Bumblebee/TransformerAbstract')
 const ImageTransformer = use('App/Transformers/Admin/ImageTransformer')
 
 /**
@@ -9,8 +9,8 @@ const ImageTransformer = use('App/Transformers/Admin/ImageTransformer')
  * @class UserTransformer
  * @constructor
  */
-class UserTransformer extends BumblebeeTransformer {
-  static get defaultInclude() {
+class UserTransformer extends TransformerAbstract {
+  defaultInclude() {
     return ['image']
   }
 
@@ -19,7 +19,6 @@ class UserTransformer extends BumblebeeTransformer {
    */
   transform(model) {
     return {
-      // add your transformation object here
       id: model.id,
       name: model.name,
       surname: model.surname,
@@ -27,8 +26,8 @@ class UserTransformer extends BumblebeeTransformer {
     }
   }
 
-  includeImage(model) {
-    return this.item(model.getRelated('image'), ImageTransformer)
+  includeImage(user) {
+    return this.item(user.getRelated('image'), ImageTransformer)
   }
 }
 
