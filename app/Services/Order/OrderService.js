@@ -37,7 +37,7 @@ class OrderService {
     // Atualiza os valores e quantidades
     await Promise.all(
       currentItems.rows.map(async item => {
-        item.fill(tems.find(n => n.id === item.id))
+        item.fill(items.find(n => n.id === item.id))
         await item.save(this.trx)
       }),
     )
@@ -69,7 +69,7 @@ class OrderService {
     if (
       Array.isArray(couponProducts) &&
       couponProducts.length < 1 &&
-      Array.isArray(couponClient) &&
+      Array.isArray(couponClients) &&
       couponClients.length < 1
     ) {
       /**
@@ -86,7 +86,7 @@ class OrderService {
       isAssociatedToProducts = true
     }
 
-    if (Array.isArray(couponClients) && couponClient.length > 0) {
+    if (Array.isArray(couponClients) && couponClients.length > 0) {
       isAssociatedToClients = true
     }
 

@@ -64,7 +64,7 @@ class OrderController {
 
       const service = new Service(order, trx)
       if (items && items.length > 0) {
-        await service.syncItems(item)
+        await service.syncItems(items)
       }
 
       await trx.commit()
