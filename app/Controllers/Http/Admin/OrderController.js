@@ -9,7 +9,7 @@ const Service = use('App/Services/Order/OrderService')
 const Database = use('Database')
 const Coupon = use('App/Models/Coupon')
 const Discount = use('App/Models/Discount')
-const Transformer = use('App/Transformers/Admin/OrderItemTransformer')
+const Transformer = use('App/Transformers/Admin/OrderTransformer')
 
 /**
  * Resourceful controller for interacting with orders
@@ -60,7 +60,7 @@ class OrderController {
 
     try {
       const { user_id, items, status } = request.all()
-      const order = await Order.create({ user_id, status }, trx)
+      let order = await Order.create({ user_id, status }, trx)
 
       const service = new Service(order, trx)
       if (items && items.length > 0) {
@@ -69,7 +69,8 @@ class OrderController {
 
       await trx.commit()
 
-      // order = await transform.item(order, Transformer)
+      order = await Order.find(order.id)
+      order = await transform.include('user,items').item(order, Transformer)
 
       return response.status(201).send(order)
     } catch (error) {
@@ -93,7 +94,9 @@ class OrderController {
   async show({ params: { id }, response, transform }) {
     let order = await Order.findOrFail(id)
 
-    order = await transform.item(order, Transformer)
+    order = await transform
+      .include('user,items,discount')
+      .item(order, Transformer)
 
     return response.send(order)
   }
@@ -123,7 +126,9 @@ class OrderController {
 
       await trx.commit()
 
-      order = await transform.item(order, Transformer)
+      order = await transform
+        .include('user,items,discount,coupons')
+        .item(order, Transformer)
 
       return response.send(order)
     } catch (error) {
@@ -166,10 +171,10 @@ class OrderController {
     }
   }
 
-  async applyDiscount({ params: { id }, request, response }) {
+  async applyDiscount({ params: { id }, request, response, transform }) {
     const { code } = request.all()
     const coupon = await Coupon.findByOrFail('code', code.toUpperCase())
-    const order = await Order.findOrFail(id)
+    let order = await Order.findOrFail(id)
 
     var info = {
       message: '',
@@ -199,6 +204,10 @@ class OrderController {
         info.message = 'Não foi possível aplicar esse cupom!'
         info.success = false
       }
+
+      order = await transform
+        .include('user,items,discount,coupons')
+        .item(order, Transformer)
 
       return response.send({ order, info })
     } catch (error) {

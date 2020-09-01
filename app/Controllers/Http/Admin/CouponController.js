@@ -105,7 +105,9 @@ class CouponController {
       await coupon.save(trx)
       trx.commit()
 
-      coupon = await transform.item(coupon, Transformer)
+      coupon = await transform
+        .include('users, products')
+        .item(coupon, Transformer)
 
       return response.status(201).send(coupon)
     } catch (error) {
@@ -192,7 +194,9 @@ class CouponController {
       await coupon.save(trx)
       await trx.commit()
 
-      coupon = await transform.item(coupon, Transformer)
+      coupon = await transform
+        .include('users,products,orders')
+        .item(coupon, Transformer)
 
       return response.status(200).send(coupon)
     } catch (error) {
