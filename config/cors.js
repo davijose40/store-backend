@@ -16,7 +16,13 @@ module.exports = {
   | Function - Receives the current origin and should return one of the above values.
   |
   */
-  origin: false,
+
+  /**
+   *  produção deixar origin: 'admin.adonisjs.com.br, adonisjs.com.br',
+   *  que é o url do fronend em produção;
+   */
+
+  origin: true,
 
   /*
   |--------------------------------------------------------------------------
@@ -83,5 +89,5 @@ module.exports = {
   | Define Access-Control-Allow-Max-Age
   |
   */
-  maxAge: 90
+  maxAge: 90,
 }

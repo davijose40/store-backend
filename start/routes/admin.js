@@ -56,7 +56,6 @@ Route.group(() => {
    *  Dashboard Route
    */
   Route.get('dashboard', 'DashboardController.index').as('dashboard')
-
 })
   .prefix('v1/admin')
   .namespace('Admin')
