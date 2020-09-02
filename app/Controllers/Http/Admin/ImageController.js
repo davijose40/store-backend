@@ -5,10 +5,11 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 // import Models image
-const fs = use('fs')
 const Image = use('App/Models/Image')
-const Transformer = use('App/Transformer/Admin/ImageTransformer')
 const { manage_single_upload, manage_multiple_uploads } = use('App/Helpers')
+const fs = use('fs')
+const Transformer = use('App/Transformers/Admin/ImageTransformer')
+const Helpers = use('Helpers')
 
 /**
  * Resourceful controller for interacting with images
@@ -47,9 +48,8 @@ class ImageController {
       // captura uma imagem ou mais do request
       const fileJar = request.file('images', {
         types: ['image'],
-        size: '2mb',
+        size: '10mb',
       })
-
       // retorno do usuário
       const images = []
       // caso seja um unico arquivo - manage_single_upload
